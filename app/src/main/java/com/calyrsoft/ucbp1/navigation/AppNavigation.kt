@@ -19,7 +19,7 @@ fun AppNavigation(navController: NavHostController) {
 
     NavHost(
         navController = navController, // Usa el navController que recibes
-        startDestination = Screen.Login.route
+        startDestination = Screen.Profile.route
     ) {
         composable(Screen.Login.route) {
             LoginScreen(
