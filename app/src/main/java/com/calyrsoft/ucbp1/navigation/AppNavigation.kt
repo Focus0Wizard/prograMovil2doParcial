@@ -1,13 +1,14 @@
 package com.calyrsoft.ucbp1.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.calyrsoft.ucbp1.features.dollar.presentation.DollarScreen
 import com.calyrsoft.ucbp1.features.github.presentation.GithubScreen
 import com.calyrsoft.ucbp1.features.login.presentation.LoginScreen
-import com.calyrsoft.ucbp1.features.movies.presentation.screen.MoviesScreen
+import com.calyrsoft.ucbp1.features.movies.presentation.MoviesScreen
 import com.calyrsoft.ucbp1.features.notification.presentation.NotificationScreen
 import com.calyrsoft.ucbp1.features.profile.presentation.ProfileScreen
 
@@ -39,9 +40,9 @@ fun AppNavigation(navController: NavHostController) {
             GithubScreen(navController = navController)
         }
         composable(Screen.Movie.route) {
-            MoviesScreen(navController = navController)
+            MoviesScreen(navController = navController, modifier = Modifier)
         }
-        composable(Screen.Notification.route) { // CORREGIDO: usa Screen.Notification.route
+        composable(Screen.Notification.route) {
             NotificationScreen(navController = navController)
         }
     }
