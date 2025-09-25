@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ucbapp</string>
+    <string name="login_title">Login</string>
+    <string name="inicio_sesion">Iniciar Sesión</string>
+    <string name="error_network">Error de conexión a internet</string>
+    <string name="error_server">Error del servidor</string>
+    <string name="error_not_found">Usuario no encontrado</string>
+    <string name="error_empty_response">Respuesta vacía del servidor</string>
+    <string name="error_unknown">Error desconocido</string>
+</resources>
