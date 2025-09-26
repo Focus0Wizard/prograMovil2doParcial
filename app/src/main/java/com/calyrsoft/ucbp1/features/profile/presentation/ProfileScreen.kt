@@ -54,17 +54,41 @@ fun ProfileScreen(
             if (state.isLoading) {
                 CircularProgressIndicator()
             } else {
+                // Avatar
+                state.avatarUrl?.let { url ->
+                    Image(
+                        painter = rememberAsyncImagePainter(url),
+                        contentDescription = "Foto de perfil",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(120.dp)
+                            .clip(CircleShape)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
 
+                // Nombre
                 Text(
-                    text = "Bienvenido a Profile",
+                    text = state.userName.ifEmpty { "Usuario desconocido" },
                     style = MaterialTheme.typography.headlineMedium
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                // Email
+                Text(
+                    text = state.userEmail.ifEmpty { "Sin correo" },
+                    style = MaterialTheme.typography.bodyLarge
+                )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                // Teléfono
+                state.telefono?.let {
+                    Text(
+                        text = "Teléfono: $it",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(24.dp))
+
                 Button(
                     onClick = {
                         navController.navigate(Screen.Dollar.route)
@@ -75,7 +99,6 @@ fun ProfileScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(48.dp))
                 Button(
                     onClick = {
                         navController.navigate(Screen.Movie.route)
@@ -84,20 +107,16 @@ fun ProfileScreen(
                     Text("Ir a Movies")
                 }
 
-
-
                 Spacer(modifier = Modifier.height(48.dp))
-                Button(
-                    onClick = {
-                        authManager.logout()
-                        navController.navigate(Screen.Login.route) {
-                            popUpTo(Screen.Profile.route) { inclusive = true }
-                        }
-                    }
-                ) {
-                    Text("Cerrar Sesión")
-                }
+            }
 
+            state.error?.let { errorMsg ->
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = errorMsg,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

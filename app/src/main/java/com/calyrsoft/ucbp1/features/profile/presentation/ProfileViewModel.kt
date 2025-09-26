@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-
     private val getProfileUseCase: GetProfileUseCase
 ) : ViewModel() {
 
@@ -18,17 +17,18 @@ class ProfileViewModel(
 
     init {
         loadProfileData()
-
     }
+
     fun loadProfileData() {
         viewModelScope.launch {
             getProfileUseCase().collect { result ->
                 result.onSuccess { profile ->
                     _state.value = _state.value.copy(
                         isLoading = false,
-                        userName = profile.name,
-                        userEmail = profile.email,
-                        avatarUrl = profile.avatarUrl
+                        userName = profile.name.value,
+                        userEmail = profile.email.value,
+                        telefono = profile.telefono.value,
+                        avatarUrl = profile.avatarUrl?.value
                     )
                 }.onFailure { e ->
                     _state.value = _state.value.copy(
@@ -39,12 +39,12 @@ class ProfileViewModel(
             }
         }
     }
-
 }
 
 data class ProfileState(
     val userName: String = "",
     val userEmail: String = "",
+    val telefono: Long? = null,
     val avatarUrl: String? = null,
     val dollarValue: Float? = null,
     val isLoading: Boolean = true,

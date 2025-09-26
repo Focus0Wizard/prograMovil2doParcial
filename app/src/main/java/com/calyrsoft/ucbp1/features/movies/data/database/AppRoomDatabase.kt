@@ -15,7 +15,7 @@ abstract class AppRoomDatabase: RoomDatabase() {
         private var Instance: AppRoomDatabase? = null
         fun getDatabase(context: Context): AppRoomDatabase {
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, AppRoomDatabase::class.java, "movies_db")
+                Room.databaseBuilder(context, AppRoomDatabase::class.java, "movies_db_entregables")
                     .build()
                     .also { Instance = it }
 
